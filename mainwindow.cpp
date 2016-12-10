@@ -18,15 +18,16 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::on_sendButton_clicked(){
-//    udpSocket.writeDatagram(buffer.data(),QHostAddress("192.168.1.133", 7000); //TODO: Quitar
+//    udpSocket.writeDatagram(buffer.data(),QHostAddress("192.168.1.133", 7000);
     sendDatagram();
 }
 
 void MainWindow::sendDatagram(){
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
-    //out.setVersion(QDataStream::Qt_5_7); //TODO: Quitar
+    out.setVersion(QDataStream::Qt_5_7);
     out << ui->mensaje->toPlainText();
+   // udpSocket.writeDatagram(datagram, QHostAddress::LocalHost, 5824);
     udpSocket.writeDatagram(datagram, QHostAddress("192.168.1.126"), 5824);
 
 }
